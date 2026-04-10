@@ -1,0 +1,84 @@
+# Agent configuration for the multi-agent ontology workflow
+# Each agent has a role, model configuration, and tool access
+
+coordinator:
+  name: "Coordinator Agent"
+  role: "Routes queries to specialist agents, manages ontology state"
+  model: "claude-sonnet-4-20250514"
+  temperature: 0
+  max_tokens: 2048
+  tools:
+    - ontology_query
+    - ontology_traverse
+  status: live
+
+osint_collector:
+  name: "OSINT Collector"
+  role: "Collects open-source intelligence via web search"
+  model: "claude-sonnet-4-20250514"
+  temperature: 0
+  max_tokens: 4096
+  tools:
+    - web_search
+    - ontology_update
+    - entity_extraction
+  status: live
+
+graph_analyst:
+  name: "Graph Analyst"
+  role: "Analyzes ontology graph for patterns and relationships"
+  model: "claude-sonnet-4-20250514"
+  temperature: 0
+  max_tokens: 4096
+  tools:
+    - ontology_query
+    - ontology_traverse
+    - exposure_calculation
+    - dependency_chain_analysis
+  status: live
+
+threat_assessor:
+  name: "Threat Assessor"
+  role: "Assesses threats, assigns risk scores"
+  model: "claude-sonnet-4-20250514"
+  temperature: 0
+  max_tokens: 4096
+  tools:
+    - threat_intelligence
+    - historical_precedents
+    - risk_matrix
+  status: scaffolded
+  integration_notes: |
+    In production, connect to:
+    - Classified threat intelligence feeds
+    - MITRE ATT&CK framework
+    - Historical conflict databases
+    - Partner nation intelligence sharing
+
+briefing_drafter:
+  name: "Briefing Drafter"
+  role: "Generates executive briefings from agent results"
+  model: "claude-sonnet-4-20250514"
+  temperature: 0.3
+  max_tokens: 8192
+  tools:
+    - document_generation
+    - template_formatting
+  status: scaffolded
+  integration_notes: |
+    In production, connect to:
+    - Palantir Report Builder
+    - Classification marking system
+    - Automated distribution
+    - Audit logging
+
+# Workflow configuration
+workflow:
+  parallel_agents:
+    - osint_collector
+    - graph_analyst
+  sequential_agents:
+    - threat_assessor
+    - briefing_drafter
+  timeout_seconds: 120
+  retry_max: 2

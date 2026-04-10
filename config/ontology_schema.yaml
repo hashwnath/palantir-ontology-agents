@@ -1,0 +1,127 @@
+# Ontology schema definition for the intelligence analysis domain
+# Defines entity types, their attributes, and valid relationship types
+
+entity_types:
+  organization:
+    description: "An organization: company, government body, military unit, NGO"
+    attributes:
+      - name: org_type
+        type: string
+        enum: [corporation, government, military, ngo]
+      - name: country
+        type: string
+      - name: sector
+        type: string
+      - name: revenue_usd
+        type: float
+        optional: true
+
+  person:
+    description: "A person of interest in the intelligence graph"
+    attributes:
+      - name: role
+        type: string
+      - name: nationality
+        type: string
+      - name: affiliation
+        type: string
+
+  location:
+    description: "A geographic location: port, city, region, military base"
+    attributes:
+      - name: latitude
+        type: float
+        optional: true
+      - name: longitude
+        type: float
+        optional: true
+      - name: location_type
+        type: string
+        enum: [port, city, region, base, strait, facility, industrial_park]
+      - name: country
+        type: string
+
+  event:
+    description: "A discrete event: military exercise, trade disruption, diplomatic incident"
+    attributes:
+      - name: event_type
+        type: string
+        enum: [military_exercise, trade_disruption, diplomatic, natural_disaster]
+      - name: start_date
+        type: string
+        format: date
+      - name: end_date
+        type: string
+        format: date
+        optional: true
+      - name: severity
+        type: string
+        enum: [low, medium, high, critical]
+
+  asset:
+    description: "A strategic asset: ship, aircraft, facility, technology"
+    attributes:
+      - name: asset_type
+        type: string
+        enum: [vessel, aircraft, facility, technology, semiconductor]
+      - name: operator
+        type: string
+      - name: status
+        type: string
+        enum: [active, deployed, under_construction, decommissioned]
+
+  threat:
+    description: "A threat entity: military buildup, cyber threat, economic coercion"
+    attributes:
+      - name: threat_type
+        type: string
+        enum: [military, cyber, economic, hybrid]
+      - name: severity
+        type: string
+        enum: [low, medium, high, critical]
+      - name: likelihood
+        type: float
+        range: [0.0, 1.0]
+      - name: impact_description
+        type: string
+
+relationship_types:
+  - OPERATES_IN
+  - SUPPLIES
+  - THREATENS
+  - RELATED_TO
+  - HEADQUARTERED_IN
+  - COMMANDS
+  - DEPLOYED_AT
+  - MANUFACTURES
+  - SHIPS_THROUGH
+  - DEPENDS_ON
+  - ALLIES_WITH
+  - COMPETES_WITH
+  - MONITORS
+  - OWNS
+  - EMPLOYS
+  - PARTICIPATES_IN
+  - TRANSITS
+  - SUPPLIES_TO
+  - LOCATED_IN
+
+# Common attributes for all entities
+base_attributes:
+  - name: id
+    type: string
+    required: true
+  - name: name
+    type: string
+    required: true
+  - name: description
+    type: string
+  - name: tags
+    type: list[string]
+  - name: confidence
+    type: float
+    range: [0.0, 1.0]
+    default: 1.0
+  - name: source
+    type: string
+    default: manual
