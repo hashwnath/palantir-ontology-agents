@@ -1,0 +1,24 @@
+{
+  "name": "palantir-ontology-agents-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Main out/demo-1080p.mp4 --crf 18 --pixel-format yuv420p --concurrency 8",
+    "render:draft": "remotion render Main out/draft.mp4 --crf 28 --scale 0.5 --concurrency 4",
+    "still": "remotion still Main out/thumbnail.png"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.242",
+    "@remotion/google-fonts": "4.0.242",
+    "@remotion/paths": "4.0.242",
+    "@remotion/shapes": "4.0.242",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.242"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}
