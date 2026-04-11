@@ -8,7 +8,11 @@ A working multi-agent system built with LangGraph that demonstrates how speciali
 
 **Demo scenario**: 4 agents analyze a Taiwan Strait supply chain disruption, traverse a 50-entity ontology graph, assess threats, and deliver an executive briefing in under 2 minutes.
 
-https://github.com/hashwnath/palantir-ontology-agents/raw/main/docs/demo.mp4
+## Demo
+
+![Demo](docs/demo.gif)
+
+[Watch full quality video](https://github.com/hashwnath/palantir-ontology-agents/releases/download/v1.0/demo.mp4)
 
 ## Architecture
 
